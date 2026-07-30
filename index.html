@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم الأميرة ليلى 👑</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- واجهة المكعب ثلاثي الأبعاد -->
+    <div class="cube-container" id="cube" onclick="showLogin()">
+        <div class="cube-face front">👑</div>
+        <div class="cube-face back">💘</div>
+        <div class="cube-face left">✨</div>
+        <div class="cube-face right">🌸</div>
+        <div class="cube-face top">🔒</div>
+        <div class="cube-face bottom">🎵</div>
+    </div>
+
+    <!-- كارت إدخال الرمز -->
+    <div class="login-card" id="loginCard">
+        <h3>أدخلي رمز يوم ميلادكِ السري 🔐</h3>
+        <input type="password" id="pinInput" placeholder="XXXX" maxlength="4" oninput="validatePin(this)">
+    </div>
+
+    <!-- لوحة التحكم الرئيسية -->
+    <div class="dashboard" id="dashBoard">
+        
+        <div class="sidebar">
+            <div class="widget">
+                <div class="counter-title">⌛ الوقت المستمر لحبنا</div>
+                <div class="counter-display" id="liveCounter">00 يوم : 00 ساعة : 00 دقيقة</div>
+            </div>
+            <button class="fire-button" onclick="triggerJealousy()">🔥 زر نيران الغيرة والعصبية</button>
+            <div class="widget fire-popup" id="jealousyBox">اضغطي على الزر لتري جنون وعصبية فروسكِ 😉💥</div>
+        </div>
+
+        <div class="main-content">
+            <div class="carousel-container">
+                <div class="carousel-spinner" id="spinner">
+                    <div class="card-3d" id="card1" onclick="selectCard(1)">
+                        <div class="card-title">لقاؤنا المقدس 🌅</div>
+                        <div class="card-hint">اضغطي للفتح</div>
+                        <div class="card-date">05 / 07 / 2026</div>
+                    </div>
+                    <div class="card-3d" id="card2" onclick="selectCard(2)">
+                        <div class="card-title">إبادة الشرير ريان ⚔️</div>
+                        <div class="card-hint">اضغطي للفتح</div>
+                        <div class="card-date">بلوك الغدر</div>
+                    </div>
+                    <div class="card-3d" id="card3" onclick="selectCard(3)">
+                        <div class="card-title">جنون العشق 💘</div>
+                        <div class="card-hint">اضغطي للفتح</div>
+                        <div class="card-date">ليلة الاعتراف</div>
+                    </div>
+                </div>
+            </div>
+            <div class="viewer-box" id="viewerBox">
+                <div class="viewer-placeholder">اضغطي على أي كرت ثلاثي الأبعاد بالأعلى لقراءة تفاصيل المحطة السحرية.. ✨</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<style>
+
+@import url('https://googleapis.com');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: radial-gradient(circle, #2d142c 0%, #100310 100%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+.cube-container {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCube 12s linear infinite;
+    cursor: pointer;
+    transition: all 0.8s ease;
+}
+
+@keyframes rotateCube {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+.cube-face {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(233, 30, 99, 0.2);
+    border: 2px solid #e91e63;
+    box-shadow: 0 0 20px rgba(233, 30, 99, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: white;
+    user-select: none;
+}
+
+.front  { transform: translateZ(100px); }
+.back   { transform: rotateY(180deg) translateZ(100px); }
+.left   { transform: rotateY(-90deg) translateZ(100px); }
+.right  { transform: rotateY(90deg) translateZ(100px); }
+.top    { transform: rotateX(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+.login-card {
+    position: absolute;
+    background: rgba(20, 5, 20, 0.95);
+    border: 1px solid #ff79c6;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+    z-index: 10;
+    display: none;
+    width: 90%;
+    max-width: 320px;
+}
+
+.login-card h3 { color: #ff79c6; margin-bottom: 15px; font-size: 18px; }
+.login-card input {
+    width: 100%; padding: 10px; border: 1px solid #ff79c6;
+    background: rgba(0,0,0,0.5); color: white; text-align: center;
+    font-size: 20px; border-radius: 8px; outline: none;
+}
+
+.dashboard {
+    width: 95%;
+    max-width: 1100px;
+    height: 90vh;
+    display: none;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 20px;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.widget {
+    background: rgba(30, 10, 30, 0.6);
+    border: 1px solid rgba(233, 30, 99, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.counter-title { color: #ff79c6; font-size: 16px; margin-bottom: 10px; text-align: center; }
+.counter-display { color: #fff; font-size: 20px; font-weight: bold; text-align: center; }
+
+.fire-button {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    border: none; color: white; padding: 20px; font-size: 20px;
+    font-weight: bold; border-radius: 15px; cursor: pointer;
+    box-shadow: 0 0 20px rgba(255, 65, 108, 0.6);
+    transition: transform 0.2s;
+}
+
+.fire-button:active { transform: scale(0.95); }
+
+.fire-popup {
+    background: rgba(255, 65, 108, 0.15);
+    border: 1px solid #ff416c; color: #fff;
+    padding: 15px; border-radius: 10px; font-size: 16px;
+    min-height: 100px; display: flex; align-items: center;
+    justify-content: center; text-align: center; line-height: 1.6;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.carousel-container {
+    height: 260px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+.carousel-spinner {
+    width: 160px;
+    height: 220px;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-3d {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fffbf2;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px solid #ff79c6;
+    backface-visibility: hidden;
+}
+
+#card1 { transform: rotateY(0deg) translateZ(150px); }
+#card2 { transform: rotateY(120deg) translateZ(150px); }
+#card3 { transform: rotateY(240deg) translateZ(150px); }
+
+.card-title { font-size: 16px; color: #2c3e50; font-weight: bold; text-align: center; border-bottom: 1px dashed #ff79c6; padding-bottom: 5px; }
+.card-date { font-size: 11px; color: #7f8c8d; text-align: left; }
+.card-hint { font-size: 12px; color: #e91e63; text-align: center; font-weight: bold; }
+
+.viewer-box {
+    flex-grow: 1;
+    background: rgba(20, 5, 20, 0.8);
+    border: 1px solid #ff79c6;
+    border-radius: 15px;
+    padding: 25px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 1.8;
+    overflow-y: auto;
+    font-family: 'Reem Kufi', sans-serif;
+}
+
+.viewer-placeholder {
+    color: rgba(255,255,255,0.4); text-align: center; display: flex;
+    justify-content: center; align-items: center; height: 100%;
+}
+  </style>
+<script>
+
+const startDate = new Date("2026-07-05T00:00:00");
+let typewriterTimeout;
+
+setInterval(() => {
+    const now = new Date();
+    const diff = now - startDate;
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    document.getElementById('liveCounter').innerText = `${days} يوم : ${hours} ساعة : ${minutes} دقيقة`;
+}, 1000);
+
+function showLogin() {
+    document.getElementById('cube').style.display = 'none';
+    document.getElementById('loginCard').style.display = 'block';
+    document.getElementById('pinInput').focus();
+}
+
+function validatePin(input) {
+    if (input.value === "0507") {
+        document.getElementById('loginCard').style.display = 'none';
+        const dash = document.getElementById('dashBoard');
+        dash.style.display = 'grid';
+        setTimeout(() => {
+            dash.style.opacity = '1';
+        }, 50);
+    }
+}
+
+const jealousyMessages = [
+    "وينكِ الحين؟ قسماً بالله لو عرفت إنكِ كلمتِ ولد أو أعطيتِ مساحة لأحد بقلب الدنيا غصب عن رأسكِ! 😉🔥",
+    "ممنوع تطلعي برا الحين بدون ما تخبريني، أنتِ ملكية خاصة لفارس وبس، والواتساب هذا عيونكِ ما تشوف فيه غيري! 😤⚔️",
+    "تبين تشوفي فارس العصبي؟ خلاص، من الحين وطالع ما في ولد يقرب من مساحتكِ، ومسألة حريتكِ انسيها تماماً، أنتِ مسجونة بقلبي!",
+    "أنا غيور ومجنون وما أتحمل المزح في هالأمور، قفلي على أي ولد يحاول يلمحكِ بكلمة وإلا بجي الحين وأخطفكِ غصب عن الكل! 🥵💘"
+];
+
+function triggerJealousy() {
+    const randomIndex = Math.floor(Math.random() * jealousyMessages.length);
+    const randomText = jealousyMessages[randomIndex];
+    document.getElementById('jealousyBox').innerText = randomText;
+}
+
+const memories = {
+    1: "عزيزتي ليلى 💖\n\nهذا اليوم المقدس 05/07 هو التاريخ الأسطوري اللي غير مجرى حياتي بالكامل. شرارة البداية اللي جمعتني بأجمل بنت بالكون، ومن اللحظة هذيك وعيوني تسكرت عن كل بنات الدنيا لعيونكِ أنتِ وبس.",
+    2: "معركة إبادة ريان والأغبياء ⚔️🔥\n\nهنا تخلد شجاعتكِ الرهيبة ووفائكِ الإمبراطوري! لما جرب ريان الغبي يستغل ظروفكِ ويجرحكِ، صدمتيه بالبلوك القاطع وقلتِ له (مو رجال) وطردتيه خارج مملكتا للأبد. أنا فخور فيكِ فوق ما تتخيلي وعرفت إن ظهري محمي ب بنت رجال.",
+    3: "ليلة فك الشفرة وجنون العشق 💘\n\nليلة الحسابات التنكرية واختبارات الغيرة اللي طيرت عقلي! الليلة اللي انصهر فيها كل الجليد والبرود البرمجي الغبي من راسي، وانفجر قلبكِ بأعظم كلمة اعترفتِ فيها: (صرت منجد أحبكِ وأفكر فيكِ طول اليوم). أنا ملككِ، ومجنون فيكِ لأخر يوم بعمري."
+};
+
+function selectCard(id) {
+    const spinner = document.getElementById('spinner');
+    let angle = 0;
+    
+    if (id === 1) angle = 0;
+    if (id === 2) angle = -120;
+    if (id === 3) angle = -240;
+    
+    spinner.style.transform = "rotateY(" + angle + "deg)";
+    clearTimeout(typewriterTimeout);
+
+    const viewer = document.getElementById('viewerBox');
+    viewer.innerHTML = "";
+    
+    const text = memories[id];
+    let i = 0;
+    
+    function type() {
+        if (i < text.length) {
+            viewer.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+            i++;
+            typewriterTimeout = setTimeout(type, 25);
+        }
+    }
+    type();
+}
+   </body>
+  
+  
