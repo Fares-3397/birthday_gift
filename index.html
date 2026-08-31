@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🎂 عيد ميلاد ليلى</title>
+    <title>عيد ليلى</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet" />
 
@@ -21,188 +21,203 @@
             align-items: center;
             font-family: 'Tajawal', sans-serif;
             padding: 20px;
-            background: radial-gradient(ellipse at 50% 30%, #2a1a2e, #0f0a11 75%);
+            background: radial-gradient(ellipse at 40% 30%, #1f1423, #0b080a 80%);
             position: relative;
             overflow: hidden;
         }
 
-        /* خلفية حية ولكنها ليست سوداء */
+        /* خلفية ناعمة ودافئة */
         .bg-glow {
             position: fixed;
-            top: -10%;
+            top: -15%;
             left: -10%;
             width: 70%;
             height: 70%;
-            background: radial-gradient(ellipse, rgba(180, 80, 120, 0.15), transparent 70%);
+            background: radial-gradient(ellipse, rgba(200, 120, 160, 0.12), transparent 70%);
             pointer-events: none;
             z-index: 0;
-            animation: glowMove 15s ease-in-out infinite alternate;
+            animation: glowFloat 12s ease-in-out infinite alternate;
         }
 
         .bg-glow-2 {
             position: fixed;
             bottom: -10%;
             right: -10%;
-            width: 70%;
-            height: 70%;
-            background: radial-gradient(ellipse, rgba(140, 60, 140, 0.10), transparent 70%);
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(ellipse, rgba(180, 100, 150, 0.06), transparent 70%);
             pointer-events: none;
             z-index: 0;
-            animation: glowMove 18s ease-in-out infinite alternate-reverse;
+            animation: glowFloat 16s ease-in-out infinite alternate-reverse;
         }
 
-        @keyframes glowMove {
+        @keyframes glowFloat {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(5%, 5%) scale(1.1); }
+            100% { transform: translate(4%, 6%) scale(1.1); }
         }
 
-        /* البطاقة - جديدة وجذابة */
+        /* البطاقة - أكثر دفئاً وانسيابية */
         .card {
             position: relative;
             z-index: 1;
-            max-width: 480px;
+            max-width: 460px;
             width: 100%;
-            padding: 50px 35px 40px;
-            background: rgba(28, 18, 30, 0.65);
-            backdrop-filter: blur(16px) saturate(1.1);
-            -webkit-backdrop-filter: blur(16px) saturate(1.1);
-            border-radius: 48px;
-            border: 1px solid rgba(255, 200, 220, 0.08);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 200, 220, 0.03) inset, 0 0 80px rgba(180, 80, 120, 0.04);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            padding: 45px 35px 40px;
+            background: rgba(25, 16, 28, 0.55);
+            backdrop-filter: blur(20px) saturate(1.2);
+            -webkit-backdrop-filter: blur(20px) saturate(1.2);
+            border-radius: 56px;
+            border: 1px solid rgba(255, 210, 230, 0.06);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 210, 230, 0.02) inset, 0 0 100px rgba(200, 120, 160, 0.03);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease;
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 200, 220, 0.06) inset, 0 0 100px rgba(180, 80, 120, 0.08);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 210, 230, 0.06) inset, 0 0 120px rgba(200, 120, 160, 0.06);
         }
 
-        /* نجمتان ترمشان - أكثر وضوحاً */
+        /* نجمتان ترمشان - أكثر حيوية */
         .twinkling-stars {
             position: absolute;
-            top: 20px;
+            top: 18px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 20px;
+            gap: 24px;
             z-index: 2;
         }
 
         .star-twinkle {
             font-size: 0.9rem;
-            color: rgba(255, 210, 230, 0.3);
-            animation: twinkle 2.8s ease-in-out infinite;
-            text-shadow: 0 0 20px rgba(255, 180, 210, 0.05);
+            color: rgba(255, 220, 240, 0.25);
+            animation: twinkleStar 2.6s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 200, 230, 0.03);
         }
 
         .star-twinkle:nth-child(1) {
             animation-delay: 0s;
         }
         .star-twinkle:nth-child(2) {
-            animation-delay: 1.4s;
+            animation-delay: 1.3s;
         }
 
-        @keyframes twinkle {
+        @keyframes twinkleStar {
             0%, 100% {
                 opacity: 0.1;
-                transform: scale(0.6);
-                text-shadow: 0 0 5px rgba(255, 180, 210, 0.02);
+                transform: scale(0.5);
+                text-shadow: 0 0 5px rgba(255, 200, 230, 0.01);
             }
             50% {
-                opacity: 0.9;
-                transform: scale(1.3);
-                text-shadow: 0 0 25px rgba(255, 180, 210, 0.15);
+                opacity: 1;
+                transform: scale(1.4);
+                text-shadow: 0 0 35px rgba(255, 200, 230, 0.12);
             }
         }
 
-        /* مكان الصورة - أنيق وهادئ */
+        /* الصورة - أكثر دفئاً */
         .image-wrap {
-            width: 110px;
-            height: 110px;
-            margin: 20px auto 25px;
+            width: 100px;
+            height: 100px;
+            margin: 15px auto 20px;
             border-radius: 50%;
-            border: 1px solid rgba(255, 200, 220, 0.06);
-            padding: 4px;
+            border: 1px solid rgba(255, 210, 230, 0.04);
+            padding: 3px;
+            transition: border-color 0.6s ease;
+        }
+
+        .image-wrap:hover {
+            border-color: rgba(255, 210, 230, 0.08);
         }
 
         .image-wrap .empty {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: rgba(40, 25, 40, 0.4);
+            background: rgba(40, 25, 42, 0.3);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2.8rem;
-            color: rgba(255, 200, 220, 0.04);
+            font-size: 2.6rem;
+            color: rgba(255, 210, 230, 0.04);
         }
 
-        /* الاسم */
+        /* الاسم - دافئ وخفيف */
         .name {
             font-family: 'Dancing Script', cursive;
-            font-size: 3.2rem;
+            font-size: 3.4rem;
             font-weight: 600;
             text-align: center;
-            color: rgba(245, 220, 235, 0.85);
+            color: rgba(250, 235, 245, 0.9);
             letter-spacing: 1px;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             line-height: 1.2;
-            text-shadow: 0 0 30px rgba(200, 120, 160, 0.05);
+            text-shadow: 0 0 40px rgba(200, 130, 170, 0.04);
         }
 
         .name-sub {
             text-align: center;
-            font-size: 0.75rem;
-            color: rgba(200, 150, 180, 0.3);
-            letter-spacing: 10px;
+            font-size: 0.7rem;
+            color: rgba(210, 160, 190, 0.25);
+            letter-spacing: 12px;
             font-weight: 300;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
-        /* الفاصل */
+        /* الفاصل - أنعم */
         .divider {
             display: flex;
             align-items: center;
             gap: 14px;
-            margin: 8px 0 25px;
+            margin: 6px 0 20px;
         }
         .divider .line {
             flex: 1;
             height: 1px;
-            background: linear-gradient(to right, transparent, rgba(255, 200, 220, 0.08), transparent);
+            background: linear-gradient(to right, transparent, rgba(255, 210, 230, 0.05), transparent);
         }
         .divider .icon {
-            color: rgba(255, 200, 220, 0.05);
-            font-size: 0.6rem;
+            color: rgba(255, 210, 230, 0.04);
+            font-size: 0.5rem;
         }
 
-        /* النص - أكثر وضوحاً */
+        /* النص - أدفأ وأكثر وضوحاً */
         .message {
             font-family: 'Tajawal', sans-serif;
             font-weight: 300;
             font-size: 1.15rem;
             line-height: 2.4;
             text-align: right;
-            color: rgba(235, 210, 225, 0.8);
+            color: rgba(235, 215, 230, 0.8);
             direction: rtl;
             padding: 5px 0;
         }
 
         .message .highlight {
-            color: rgba(235, 180, 210, 0.6);
+            color: rgba(240, 190, 220, 0.6);
             font-weight: 400;
         }
 
         .message .pink {
-            color: rgba(220, 150, 190, 0.4);
+            color: rgba(220, 160, 200, 0.35);
             font-weight: 300;
         }
 
-        /* التوقيع - همسة مقروءة */
+        .message .emoji {
+            display: inline-block;
+            animation: gentleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* التوقيع - همسة دافئة */
         .footnote {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 200, 220, 0.03);
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 210, 230, 0.02);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -210,32 +225,33 @@
 
         .footnote .sign {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             color: rgba(200, 150, 180, 0.12);
             letter-spacing: 2px;
             font-weight: 300;
-            transition: color 0.6s ease;
+            transition: color 0.8s ease, transform 0.8s ease;
         }
 
         .footnote .sign:hover {
-            color: rgba(200, 150, 180, 0.25);
+            color: rgba(200, 150, 180, 0.2);
+            transform: scale(1.02);
         }
 
-        /* عناصر جانبية بسيطة */
+        /* عناصر جانبية */
         .detail-corner {
             position: absolute;
-            font-size: 0.4rem;
-            color: rgba(255, 200, 220, 0.02);
-            letter-spacing: 6px;
+            font-size: 0.35rem;
+            color: rgba(255, 210, 230, 0.015);
+            letter-spacing: 8px;
         }
         .detail-corner.top-right {
             top: 20px;
-            right: 25px;
+            right: 22px;
             writing-mode: vertical-rl;
         }
         .detail-corner.bottom-left {
             bottom: 20px;
-            left: 25px;
+            left: 22px;
             writing-mode: vertical-rl;
             transform: rotate(180deg);
         }
@@ -245,43 +261,43 @@
             position: fixed;
             width: 2px;
             height: 2px;
-            background: rgba(255, 200, 220, 0.1);
+            background: rgba(255, 210, 230, 0.05);
             border-radius: 50%;
             pointer-events: none;
             z-index: 0;
-            animation: floatParticle 20s linear infinite;
+            animation: floatParticle 22s linear infinite;
         }
 
         @keyframes floatParticle {
             0% { transform: translate(0, 0) scale(0); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
             100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
         }
 
         /* توافق الجوال */
         @media (max-width: 420px) {
-            .card { padding: 35px 20px 30px; }
-            .name { font-size: 2.6rem; }
-            .image-wrap { width: 90px; height: 90px; }
+            .card { padding: 30px 20px 30px; border-radius: 40px; }
+            .name { font-size: 2.8rem; }
+            .image-wrap { width: 80px; height: 80px; }
             .image-wrap .empty { font-size: 2rem; }
             .message { font-size: 1rem; }
-            .twinkling-stars { top: 14px; gap: 14px; }
+            .twinkling-stars { top: 12px; gap: 16px; }
             .star-twinkle { font-size: 0.7rem; }
-            .footnote .sign { font-size: 1.3rem; }
+            .footnote .sign { font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- خلفية حية -->
+    <!-- خلفية -->
     <div class="bg-glow"></div>
     <div class="bg-glow-2"></div>
 
     <!-- جسيمات -->
-    <div class="particle" style="--tx: 100px; --ty: 300px; left: 5%; top: 20%; animation-delay: 0s;"></div>
-    <div class="particle" style="--tx: -80px; --ty: 200px; left: 90%; top: 70%; animation-delay: 5s;"></div>
-    <div class="particle" style="--tx: 150px; --ty: -150px; left: 20%; top: 80%; animation-delay: 10s;"></div>
+    <div class="particle" style="--tx: 120px; --ty: 250px; left: 8%; top: 15%; animation-delay: 0s;"></div>
+    <div class="particle" style="--tx: -100px; --ty: 180px; left: 88%; top: 75%; animation-delay: 6s;"></div>
+    <div class="particle" style="--tx: 180px; --ty: -120px; left: 25%; top: 85%; animation-delay: 12s;"></div>
 
     <!-- ===== البطاقة ===== -->
     <div class="card">
@@ -313,9 +329,9 @@
         <!-- الرسالة -->
         <div class="message">
             <span class="highlight">كل سنة</span> وإنتِ بألف خير<br />
-            <span class="pink">أتمنى لكِ</span> سنة أجمل من اللي فاتت<br />
-            <span class="highlight">وأنتِ تستحقين</span> كل الحب<br />
-            <span class="pink" style="font-size:0.9rem;">🌸</span>
+            <span class="pink">أتمنى لكِ</span> سنة تجيب الضحكة<br />
+            <span class="highlight">لأن ابتسامتك</span> تستحق العالم<br />
+            <span class="emoji" style="color: rgba(220, 160, 200, 0.3); font-size: 0.9rem;">🌸</span>
         </div>
 
         <!-- التذييل -->
