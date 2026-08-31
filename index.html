@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>عيد ليلى</title>
+    <title>ليلى</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@300;400;600&family=Tajawal:wght@200;300;400&display=swap" rel="stylesheet" />
 
     <style>
         * {
@@ -15,331 +15,214 @@
         }
 
         body {
+            background: #070408;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Tajawal', sans-serif;
-            padding: 20px;
-            background: radial-gradient(ellipse at 40% 30%, #1f1423, #0b080a 80%);
-            position: relative;
             overflow: hidden;
-        }
-
-        /* خلفية ناعمة ودافئة */
-        .bg-glow {
-            position: fixed;
-            top: -15%;
-            left: -10%;
-            width: 70%;
-            height: 70%;
-            background: radial-gradient(ellipse, rgba(200, 120, 160, 0.12), transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-            animation: glowFloat 12s ease-in-out infinite alternate;
-        }
-
-        .bg-glow-2 {
-            position: fixed;
-            bottom: -10%;
-            right: -10%;
-            width: 60%;
-            height: 60%;
-            background: radial-gradient(ellipse, rgba(180, 100, 150, 0.06), transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-            animation: glowFloat 16s ease-in-out infinite alternate-reverse;
-        }
-
-        @keyframes glowFloat {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(4%, 6%) scale(1.1); }
-        }
-
-        /* البطاقة - أكثر دفئاً وانسيابية */
-        .card {
             position: relative;
-            z-index: 1;
-            max-width: 460px;
-            width: 100%;
-            padding: 45px 35px 40px;
-            background: rgba(25, 16, 28, 0.55);
-            backdrop-filter: blur(20px) saturate(1.2);
-            -webkit-backdrop-filter: blur(20px) saturate(1.2);
-            border-radius: 56px;
-            border: 1px solid rgba(255, 210, 230, 0.06);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 210, 230, 0.02) inset, 0 0 100px rgba(200, 120, 160, 0.03);
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease;
         }
 
-        .card:hover {
-            transform: translateY(-6px) scale(1.01);
-            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 210, 230, 0.06) inset, 0 0 120px rgba(200, 120, 160, 0.06);
-        }
-
-        /* نجمتان ترمشان - أكثر حيوية */
-        .twinkling-stars {
-            position: absolute;
-            top: 18px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 24px;
-            z-index: 2;
-        }
-
-        .star-twinkle {
-            font-size: 0.9rem;
-            color: rgba(255, 220, 240, 0.25);
-            animation: twinkleStar 2.6s ease-in-out infinite;
-            text-shadow: 0 0 30px rgba(255, 200, 230, 0.03);
-        }
-
-        .star-twinkle:nth-child(1) {
-            animation-delay: 0s;
-        }
-        .star-twinkle:nth-child(2) {
-            animation-delay: 1.3s;
-        }
-
-        @keyframes twinkleStar {
-            0%, 100% {
-                opacity: 0.1;
-                transform: scale(0.5);
-                text-shadow: 0 0 5px rgba(255, 200, 230, 0.01);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.4);
-                text-shadow: 0 0 35px rgba(255, 200, 230, 0.12);
-            }
-        }
-
-        /* الصورة - أكثر دفئاً */
-        .image-wrap {
-            width: 100px;
-            height: 100px;
-            margin: 15px auto 20px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 210, 230, 0.04);
-            padding: 3px;
-            transition: border-color 0.6s ease;
-        }
-
-        .image-wrap:hover {
-            border-color: rgba(255, 210, 230, 0.08);
-        }
-
-        .image-wrap .empty {
+        /* ===== السماء ===== */
+        .sky {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            background: rgba(40, 25, 42, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.6rem;
-            color: rgba(255, 210, 230, 0.04);
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(80, 40, 70, 0.15), transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(60, 30, 80, 0.08), transparent 50%),
+                #070408;
         }
 
-        /* الاسم - دافئ وخفيف */
-        .name {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3.4rem;
-            font-weight: 600;
-            text-align: center;
-            color: rgba(250, 235, 245, 0.9);
-            letter-spacing: 1px;
-            margin-bottom: 2px;
-            line-height: 1.2;
-            text-shadow: 0 0 40px rgba(200, 130, 170, 0.04);
-        }
-
-        .name-sub {
-            text-align: center;
-            font-size: 0.7rem;
-            color: rgba(210, 160, 190, 0.25);
-            letter-spacing: 12px;
-            font-weight: 300;
-            margin-bottom: 20px;
-        }
-
-        /* الفاصل - أنعم */
-        .divider {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin: 6px 0 20px;
-        }
-        .divider .line {
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(255, 210, 230, 0.05), transparent);
-        }
-        .divider .icon {
-            color: rgba(255, 210, 230, 0.04);
-            font-size: 0.5rem;
-        }
-
-        /* النص - أدفأ وأكثر وضوحاً */
-        .message {
-            font-family: 'Tajawal', sans-serif;
-            font-weight: 300;
-            font-size: 1.15rem;
-            line-height: 2.4;
-            text-align: right;
-            color: rgba(235, 215, 230, 0.8);
-            direction: rtl;
-            padding: 5px 0;
-        }
-
-        .message .highlight {
-            color: rgba(240, 190, 220, 0.6);
-            font-weight: 400;
-        }
-
-        .message .pink {
-            color: rgba(220, 160, 200, 0.35);
-            font-weight: 300;
-        }
-
-        .message .emoji {
-            display: inline-block;
-            animation: gentleFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes gentleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
-        }
-
-        /* التوقيع - همسة دافئة */
-        .footnote {
-            margin-top: 28px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255, 210, 230, 0.02);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .footnote .sign {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.7rem;
-            color: rgba(200, 150, 180, 0.12);
-            letter-spacing: 2px;
-            font-weight: 300;
-            transition: color 0.8s ease, transform 0.8s ease;
-        }
-
-        .footnote .sign:hover {
-            color: rgba(200, 150, 180, 0.2);
-            transform: scale(1.02);
-        }
-
-        /* عناصر جانبية */
-        .detail-corner {
+        /* ===== النجوم المتكاسلة ===== */
+        .star {
             position: absolute;
-            font-size: 0.35rem;
-            color: rgba(255, 210, 230, 0.015);
+            border-radius: 50%;
+            background: white;
+            animation: floatStar linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatStar {
+            0% { opacity: 0; transform: translate(0, 0) scale(0.3); }
+            15% { opacity: 0.6; }
+            85% { opacity: 0.6; }
+            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.2); }
+        }
+
+        /* ===== الكلمات ===== */
+        .words {
+            position: relative;
+            z-index: 1;
+            max-width: 500px;
+            width: 100%;
+            padding: 30px 25px;
+            text-align: center;
+            direction: rtl;
+        }
+
+        .word {
+            font-weight: 200;
+            letter-spacing: 3px;
+            line-height: 2;
+            opacity: 0;
+            animation: wordAppear 4s ease forwards;
+        }
+
+        .word:nth-child(1) {
+            animation-delay: 0.5s;
+            font-size: 3.8rem;
+            font-family: 'Dancing Script', cursive;
+            color: rgba(235, 200, 220, 0.12);
             letter-spacing: 8px;
         }
-        .detail-corner.top-right {
-            top: 20px;
-            right: 22px;
-            writing-mode: vertical-rl;
-        }
-        .detail-corner.bottom-left {
-            bottom: 20px;
-            left: 22px;
-            writing-mode: vertical-rl;
-            transform: rotate(180deg);
+
+        .word:nth-child(2) {
+            animation-delay: 3s;
+            font-size: 1.4rem;
+            color: rgba(210, 170, 200, 0.06);
+            letter-spacing: 12px;
+            margin-top: 30px;
         }
 
-        /* جسيمات خفيفة جداً */
-        .particle {
+        .word:nth-child(3) {
+            animation-delay: 6s;
+            font-size: 1.8rem;
+            font-family: 'Dancing Script', cursive;
+            color: rgba(210, 170, 200, 0.05);
+            letter-spacing: 6px;
+            margin-top: 40px;
+        }
+
+        .word:nth-child(4) {
+            animation-delay: 9s;
+            font-size: 1rem;
+            color: rgba(200, 160, 190, 0.03);
+            letter-spacing: 10px;
+            margin-top: 30px;
+            font-weight: 200;
+        }
+
+        @keyframes wordAppear {
+            0% { opacity: 0; transform: translateY(20px); }
+            20% { opacity: 0.6; transform: translateY(0); }
+            80% { opacity: 0.6; }
+            100% { opacity: 0.1; transform: translateY(-10px); }
+        }
+
+        /* ===== لا شيء آخر ===== */
+        .nothing {
             position: fixed;
-            width: 2px;
-            height: 2px;
-            background: rgba(255, 210, 230, 0.05);
-            border-radius: 50%;
-            pointer-events: none;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.005);
+            font-size: 0.4rem;
+            letter-spacing: 15px;
+            font-family: 'Georgia', serif;
             z-index: 0;
-            animation: floatParticle 22s linear infinite;
+            animation: nothingFade 20s ease 12s forwards;
         }
 
-        @keyframes floatParticle {
-            0% { transform: translate(0, 0) scale(0); opacity: 0; }
-            10% { opacity: 0.2; }
-            90% { opacity: 0.2; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
+        @keyframes nothingFade {
+            0% { opacity: 0; }
+            100% { opacity: 0.2; }
         }
 
-        /* توافق الجوال */
+        /* ===== خط صغير يظهر أخيراً ===== */
+        .whisper {
+            position: fixed;
+            bottom: 50px;
+            right: 30px;
+            z-index: 1;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: rgba(200, 150, 180, 0.015);
+            letter-spacing: 4px;
+            opacity: 0;
+            animation: whisperAppear 10s ease 14s forwards;
+        }
+
+        @keyframes whisperAppear {
+            0% { opacity: 0; transform: translateX(10px); }
+            100% { opacity: 0.06; transform: translateX(0); }
+        }
+
+        /* ===== توافق ===== */
         @media (max-width: 420px) {
-            .card { padding: 30px 20px 30px; border-radius: 40px; }
-            .name { font-size: 2.8rem; }
-            .image-wrap { width: 80px; height: 80px; }
-            .image-wrap .empty { font-size: 2rem; }
-            .message { font-size: 1rem; }
-            .twinkling-stars { top: 12px; gap: 16px; }
-            .star-twinkle { font-size: 0.7rem; }
-            .footnote .sign { font-size: 1.4rem; }
+            .word:nth-child(1) { font-size: 2.8rem; }
+            .word:nth-child(2) { font-size: 1.1rem; }
+            .word:nth-child(3) { font-size: 1.4rem; }
+            .whisper { font-size: 1.4rem; bottom: 30px; right: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- خلفية -->
-    <div class="bg-glow"></div>
-    <div class="bg-glow-2"></div>
+    <!-- السماء -->
+    <div class="sky" id="sky"></div>
 
-    <!-- جسيمات -->
-    <div class="particle" style="--tx: 120px; --ty: 250px; left: 8%; top: 15%; animation-delay: 0s;"></div>
-    <div class="particle" style="--tx: -100px; --ty: 180px; left: 88%; top: 75%; animation-delay: 6s;"></div>
-    <div class="particle" style="--tx: 180px; --ty: -120px; left: 25%; top: 85%; animation-delay: 12s;"></div>
-
-    <!-- ===== البطاقة ===== -->
-    <div class="card">
-
-        <!-- نجمتان ترمشان -->
-        <div class="twinkling-stars">
-            <span class="star-twinkle">✦</span>
-            <span class="star-twinkle">✦</span>
-        </div>
-
-        <div class="detail-corner top-right">· ·</div>
-        <div class="detail-corner bottom-left">· ·</div>
-
-        <!-- الصورة -->
-        <div class="image-wrap">
-            <div class="empty">✦</div>
-        </div>
-
-        <!-- الاسم -->
-        <div class="name">ليلى</div>
-        <div class="name-sub">· عيد ميلادك ·</div>
-
-        <div class="divider">
-            <span class="line"></span>
-            <span class="icon">◆</span>
-            <span class="line"></span>
-        </div>
-
-        <!-- الرسالة -->
-        <div class="message">
-            <span class="highlight">كل سنة</span> وإنتِ بألف خير<br />
-            <span class="pink">أتمنى لكِ</span> سنة تجيب الضحكة<br />
-            <span class="highlight">لأن ابتسامتك</span> تستحق العالم<br />
-            <span class="emoji" style="color: rgba(220, 160, 200, 0.3); font-size: 0.9rem;">🌸</span>
-        </div>
-
-        <!-- التذييل -->
-        <div class="footnote">
-            <span class="sign">من فارس... لليلى</span>
-        </div>
-
+    <!-- الكلمات -->
+    <div class="words">
+        <div class="word">ليلى</div>
+        <div class="word">عيد ميلادك</div>
+        <div class="word">ما أقدر أقول أكثر</div>
+        <div class="word">وأكثر شخص أتمنى له الخير</div>
     </div>
+
+    <!-- همسة أخيرة -->
+    <div class="whisper">من فارس</div>
+
+    <!-- لا شيء -->
+    <div class="nothing">· · ·</div>
+
+    <script>
+        // ============================================================
+        // نجوم متكاسلة
+        // ============================================================
+        function createLazyStars() {
+            const sky = document.getElementById('sky');
+            const count = 140;
+
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+
+                const size = Math.random() * 2.5 + 0.5;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+
+                const dx = (Math.random() - 0.5) * 250;
+                const dy = (Math.random() - 0.5) * 250;
+                star.style.setProperty('--dx', dx + 'px');
+                star.style.setProperty('--dy', dy + 'px');
+
+                star.style.animationDuration = (15 + Math.random() * 25) + 's';
+                star.style.animationDelay = (Math.random() * 20) + 's';
+
+                star.style.background = `rgba(255, ${200 + Math.random() * 55}, ${210 + Math.random() * 45}, 0.4)`;
+                star.style.boxShadow = `0 0 ${size * 2}px rgba(255, 182, 193, 0.03)`;
+
+                sky.appendChild(star);
+            }
+        }
+
+        createLazyStars();
+
+        // ============================================================
+        // كونسول
+        // ============================================================
+        console.log('%cليلى', 'font-size:40px; color:#b88a9a; font-weight:100; letter-spacing:15px;');
+        console.log('%cعيد ميلادك', 'font-size:18px; color:#b88a9a; font-weight:100; letter-spacing:8px; opacity:0.4;');
+        console.log('%c...', 'font-size:12px; color:#b88a9a; opacity:0.2;');
+    </script>
 
 </body>
 </html>
