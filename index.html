@@ -3,226 +3,505 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ليلى</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@300;400;600&family=Tajawal:wght@200;300;400&display=swap" rel="stylesheet" />
-
+    <title>🎉 عيد ميلاد ليلى</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            background: #070408;
+            background: #fff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'Arial', sans-serif;
             overflow: hidden;
-            position: relative;
         }
-
-        /* ===== السماء ===== */
-        .sky {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(ellipse at 30% 20%, rgba(80, 40, 70, 0.15), transparent 60%),
-                radial-gradient(ellipse at 70% 80%, rgba(60, 30, 80, 0.08), transparent 50%),
-                #070408;
-        }
-
-        /* ===== النجوم المتكاسلة ===== */
-        .star {
-            position: absolute;
-            border-radius: 50%;
+        canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
             background: white;
-            animation: floatStar linear infinite;
-            opacity: 0;
-        }
-
-        @keyframes floatStar {
-            0% { opacity: 0; transform: translate(0, 0) scale(0.3); }
-            15% { opacity: 0.6; }
-            85% { opacity: 0.6; }
-            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.2); }
-        }
-
-        /* ===== الكلمات ===== */
-        .words {
-            position: relative;
-            z-index: 1;
-            max-width: 500px;
-            width: 100%;
-            padding: 30px 25px;
-            text-align: center;
-            direction: rtl;
-        }
-
-        .word {
-            font-weight: 200;
-            letter-spacing: 3px;
-            line-height: 2;
-            opacity: 0;
-            animation: wordAppear 4s ease forwards;
-        }
-
-        .word:nth-child(1) {
-            animation-delay: 0.5s;
-            font-size: 3.8rem;
-            font-family: 'Dancing Script', cursive;
-            color: rgba(235, 200, 220, 0.12);
-            letter-spacing: 8px;
-        }
-
-        .word:nth-child(2) {
-            animation-delay: 3s;
-            font-size: 1.4rem;
-            color: rgba(210, 170, 200, 0.06);
-            letter-spacing: 12px;
-            margin-top: 30px;
-        }
-
-        .word:nth-child(3) {
-            animation-delay: 6s;
-            font-size: 1.8rem;
-            font-family: 'Dancing Script', cursive;
-            color: rgba(210, 170, 200, 0.05);
-            letter-spacing: 6px;
-            margin-top: 40px;
-        }
-
-        .word:nth-child(4) {
-            animation-delay: 9s;
-            font-size: 1rem;
-            color: rgba(200, 160, 190, 0.03);
-            letter-spacing: 10px;
-            margin-top: 30px;
-            font-weight: 200;
-        }
-
-        @keyframes wordAppear {
-            0% { opacity: 0; transform: translateY(20px); }
-            20% { opacity: 0.6; transform: translateY(0); }
-            80% { opacity: 0.6; }
-            100% { opacity: 0.1; transform: translateY(-10px); }
-        }
-
-        /* ===== لا شيء آخر ===== */
-        .nothing {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.005);
-            font-size: 0.4rem;
-            letter-spacing: 15px;
-            font-family: 'Georgia', serif;
-            z-index: 0;
-            animation: nothingFade 20s ease 12s forwards;
-        }
-
-        @keyframes nothingFade {
-            0% { opacity: 0; }
-            100% { opacity: 0.2; }
-        }
-
-        /* ===== خط صغير يظهر أخيراً ===== */
-        .whisper {
-            position: fixed;
-            bottom: 50px;
-            right: 30px;
-            z-index: 1;
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
-            color: rgba(200, 150, 180, 0.015);
-            letter-spacing: 4px;
-            opacity: 0;
-            animation: whisperAppear 10s ease 14s forwards;
-        }
-
-        @keyframes whisperAppear {
-            0% { opacity: 0; transform: translateX(10px); }
-            100% { opacity: 0.06; transform: translateX(0); }
-        }
-
-        /* ===== توافق ===== */
-        @media (max-width: 420px) {
-            .word:nth-child(1) { font-size: 2.8rem; }
-            .word:nth-child(2) { font-size: 1.1rem; }
-            .word:nth-child(3) { font-size: 1.4rem; }
-            .whisper { font-size: 1.4rem; bottom: 30px; right: 20px; }
+            cursor: default;
         }
     </style>
 </head>
 <body>
-
-    <!-- السماء -->
-    <div class="sky" id="sky"></div>
-
-    <!-- الكلمات -->
-    <div class="words">
-        <div class="word">ليلى</div>
-        <div class="word">عيد ميلادك</div>
-        <div class="word">ما أقدر أقول أكثر</div>
-        <div class="word">وأكثر شخص أتمنى له الخير</div>
-    </div>
-
-    <!-- همسة أخيرة -->
-    <div class="whisper">من فارس</div>
-
-    <!-- لا شيء -->
-    <div class="nothing">· · ·</div>
-
+    <canvas id="c"></canvas>
     <script>
-        // ============================================================
-        // نجوم متكاسلة
-        // ============================================================
-        function createLazyStars() {
-            const sky = document.getElementById('sky');
-            const count = 140;
+        // ================================================================
+        //  1. الإعدادات الأساسية
+        // ================================================================
+        const canvas = document.getElementById('c');
+        const ctx = canvas.getContext('2d');
 
-            for (let i = 0; i < count; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
+        let W, H;
 
-                const size = Math.random() * 2.5 + 0.5;
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
 
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-
-                const dx = (Math.random() - 0.5) * 250;
-                const dy = (Math.random() - 0.5) * 250;
-                star.style.setProperty('--dx', dx + 'px');
-                star.style.setProperty('--dy', dy + 'px');
-
-                star.style.animationDuration = (15 + Math.random() * 25) + 's';
-                star.style.animationDelay = (Math.random() * 20) + 's';
-
-                star.style.background = `rgba(255, ${200 + Math.random() * 55}, ${210 + Math.random() * 45}, 0.4)`;
-                star.style.boxShadow = `0 0 ${size * 2}px rgba(255, 182, 193, 0.03)`;
-
-                sky.appendChild(star);
-            }
+        // ================================================================
+        //  2. أدوات الرسم المساعدة
+        // ================================================================
+        function drawCircle(x, y, r, color) {
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
         }
 
-        createLazyStars();
+        function drawRect(x, y, w, h, color) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, w, h);
+        }
 
-        // ============================================================
-        // كونسول
-        // ============================================================
-        console.log('%cليلى', 'font-size:40px; color:#b88a9a; font-weight:100; letter-spacing:15px;');
-        console.log('%cعيد ميلادك', 'font-size:18px; color:#b88a9a; font-weight:100; letter-spacing:8px; opacity:0.4;');
-        console.log('%c...', 'font-size:12px; color:#b88a9a; opacity:0.2;');
+        function drawText(txt, x, y, size, color, align = 'center') {
+            ctx.font = `${size}px Arial, sans-serif`;
+            ctx.textAlign = align;
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = color;
+            ctx.fillText(txt, x, y);
+        }
+
+        // ================================================================
+        //  3. رسم الشخصيات (نسخ مبسطة شبيهة بالأنمي)
+        // ================================================================
+
+        // ----- 3.1 لايت ياغامي -----
+        function drawLight(x, y, scale = 1) {
+            const s = scale;
+            // الوجه (بيضاوي)
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(s, s);
+
+            // شعر أسود
+            ctx.fillStyle = '#1a1a1a';
+            ctx.beginPath();
+            ctx.ellipse(0, -40, 50, 60, 0, 0, Math.PI * 2);
+            ctx.fill();
+            // خصلات
+            ctx.fillRect(-45, -70, 20, 40);
+            ctx.fillRect(25, -70, 20, 40);
+
+            // بشرة
+            ctx.fillStyle = '#f5e6d3';
+            ctx.beginPath();
+            ctx.ellipse(0, 10, 40, 50, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // عيون حادة
+            ctx.fillStyle = '#2c1810';
+            ctx.fillRect(-25, -5, 15, 6);
+            ctx.fillRect(10, -5, 15, 6);
+            // نظرة ثاقبة (نقط بيضاء)
+            ctx.fillStyle = 'white';
+            drawCircle(-18, -3, 2.5, 'white');
+            drawCircle(17, -3, 2.5, 'white');
+
+            // حاجبين
+            ctx.strokeStyle = '#1a1a1a';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(-30, -18);
+            ctx.lineTo(-10, -22);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(30, -18);
+            ctx.lineTo(10, -22);
+            ctx.stroke();
+
+            // فم (خط مستقيم)
+            ctx.strokeStyle = '#8b5a4a';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(-10, 18);
+            ctx.lineTo(10, 18);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        // ----- 3.2 ميامورا إيزومي (هاوريما) -----
+        function drawMiyamura(x, y, scale = 1) {
+            const s = scale;
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(s, s);
+
+            // شعر بني فاتح
+            ctx.fillStyle = '#b8956a';
+            ctx.beginPath();
+            ctx.ellipse(0, -35, 48, 55, 0, 0, Math.PI * 2);
+            ctx.fill();
+            // غرة جانبية
+            ctx.fillRect(-40, -60, 15, 45);
+            ctx.fillRect(25, -60, 15, 45);
+
+            // بشرة
+            ctx.fillStyle = '#fce8d5';
+            ctx.beginPath();
+            ctx.ellipse(0, 15, 38, 48, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // عيون دافئة (كبيرة)
+            ctx.fillStyle = '#4a3728';
+            ctx.beginPath();
+            ctx.ellipse(-18, 2, 10, 12, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(18, 2, 10, 12, 0, 0, Math.PI * 2);
+            ctx.fill();
+            // بريق
+            ctx.fillStyle = 'white';
+            drawCircle(-15, -2, 3, 'white');
+            drawCircle(21, -2, 3, 'white');
+
+            // ابتسامة خفيفة
+            ctx.strokeStyle = '#b37b5e';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(0, 20, 12, 0.1, Math.PI - 0.1);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        // ----- 3.3 نيمار (نسخة أنمي) -----
+        function drawNeymar(x, y, scale = 1) {
+            const s = scale;
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(s, s);
+
+            // شعر (ضفائر صغيرة)
+            ctx.fillStyle = '#2c1810';
+            ctx.beginPath();
+            ctx.ellipse(0, -38, 50, 55, 0, 0, Math.PI * 2);
+            ctx.fill();
+            // ضفائر جانبية
+            ctx.fillRect(-50, -50, 15, 30);
+            ctx.fillRect(35, -50, 15, 30);
+
+            // بشرة (سمراء)
+            ctx.fillStyle = '#d4a574';
+            ctx.beginPath();
+            ctx.ellipse(0, 12, 42, 52, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // عيون
+            ctx.fillStyle = '#2c1810';
+            ctx.fillRect(-22, -2, 12, 6);
+            ctx.fillRect(10, -2, 12, 6);
+            ctx.fillStyle = 'white';
+            drawCircle(-17, 0, 2.5, 'white');
+            drawCircle(15, 0, 2.5, 'white');
+
+            // ابتسامة عريضة
+            ctx.strokeStyle = '#8b5a4a';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.arc(0, 22, 16, 0.1, Math.PI - 0.1);
+            ctx.stroke();
+
+            // كرة قدم بجانبه
+            ctx.fillStyle = '#222';
+            drawCircle(55, 30, 18, '#222');
+            ctx.fillStyle = '#555';
+            ctx.beginPath();
+            ctx.arc(55, 30, 18, 0, Math.PI * 2);
+            ctx.stroke();
+            // خطوط الكرة
+            ctx.strokeStyle = '#aaa';
+            ctx.lineWidth = 1.5;
+            for (let i = 0; i < 5; i++) {
+                const angle = (i / 5) * Math.PI * 2;
+                ctx.beginPath();
+                ctx.moveTo(55, 30);
+                ctx.lineTo(55 + Math.cos(angle) * 18, 30 + Math.sin(angle) * 18);
+                ctx.stroke();
+            }
+
+            ctx.restore();
+        }
+
+        // ================================================================
+        //  4. رسم الخلفيات والمشاهد
+        // ================================================================
+
+        let scene = 0; // 0: أبيض, 1: لايت, 2: ميامورا, 3: نيمار, 4: انفجار, 5: حفلة, 6: نهاية
+        let timer = 0;
+        let frame = 0;
+        let particles = [];
+        let showText = '';
+
+        // ================================================================
+        //  5. مشاهد القصة (تسلسل الأحداث)
+        // ================================================================
+
+        function drawScene() {
+            ctx.clearRect(0, 0, W, H);
+
+            // ---- المشهد 0: فراغ أبيض ----
+            if (scene === 0) {
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, W, H);
+                // بعد 1.5 ثانية يبدأ المشهد الأول
+                if (frame > 90) {
+                    scene = 1;
+                    frame = 0;
+                }
+            }
+
+            // ---- المشهد 1: لايت يدخل ----
+            else if (scene === 1) {
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, W, H);
+
+                // لايت يظهر كبيراً ثم يتراجع
+                let scale = 1 + (1 - Math.min(frame / 30, 1)) * 0.5;
+                let x = W / 2;
+                let y = H / 2 + 20;
+
+                // إذا مر وقت كافٍ يتحرك للخلف
+                if (frame > 60) {
+                    scale = 0.8;
+                    y = H / 2 - 30;
+                }
+
+                drawLight(x, y, scale * 0.8);
+
+                // حوار لايت
+                if (frame < 30) {
+                    drawText('"هل رأى أحدكم ريوك؟"', W / 2, H - 80, 28, '#333');
+                } else if (frame < 80) {
+                    drawText('"ليلى؟ اليوم عيد ميلادك؟"', W / 2, H - 80, 32, '#c0392b');
+                } else if (frame < 130) {
+                    drawText('"كدت أنسى أمرك يا محظوظة!"', W / 2, H - 80, 30, '#c0392b');
+                } else if (frame < 180) {
+                    drawText('"عيد ميلاد سعيد!"', W / 2, H - 80, 38, '#e67e22');
+                } else {
+                    // بعد 180 إطار ينتقل للمشهد التالي
+                    if (frame > 200) {
+                        scene = 2;
+                        frame = 0;
+                    }
+                }
+            }
+
+            // ---- المشهد 2: ميامورا يسقط ----
+            else if (scene === 2) {
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, W, H);
+
+                // ميامورا يسقط من الأعلى
+                let y = -100 + Math.min(frame * 6, H / 2 + 20);
+                if (frame > 60) y = H / 2 + 20;
+                drawMiyamura(W / 2, y, 0.7);
+
+                // حوار ميامورا
+                if (frame < 30) {
+                    drawText('"أوخ... مؤلم!"', W / 2, H - 100, 28, '#333');
+                } else if (frame < 80) {
+                    drawText('"أها... ليلى."', W / 2, H - 100, 30, '#2980b9');
+                } else if (frame < 130) {
+                    drawText('"أهلاً بكِ... عيد ميلاد سعيد."', W / 2, H - 100, 28, '#2980b9');
+                } else {
+                    if (frame > 160) {
+                        scene = 3;
+                        frame = 0;
+                    }
+                }
+            }
+
+            // ---- المشهد 3: نيمار والكرة ----
+            else if (scene === 3) {
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, W, H);
+
+                // ميامورا واقف
+                drawMiyamura(W / 2 - 120, H / 2 + 20, 0.6);
+
+                // نيمار يدخل من اليمين
+                let xN = W + 50 - Math.min(frame * 8, 300);
+                if (frame > 40) xN = W / 2 + 120;
+                drawNeymar(xN, H / 2 + 20, 0.7);
+
+                // الكرة تضرب ميامورا
+                if (frame > 30 && frame < 50) {
+                    drawCircle(W / 2 - 80, H / 2 - 20, 20, '#222');
+                }
+
+                // حوارات
+                if (frame < 20) {
+                    drawText('"من الفاعل؟"', W / 2 - 120, H / 2 - 100, 26, '#c0392b');
+                } else if (frame < 60) {
+                    drawText('"آسف! تهت في الطريق!"', xN, H / 2 - 100, 26, '#333');
+                } else if (frame < 110) {
+                    drawText('"ليلى! أنا هنا!"', xN, H / 2 - 100, 34, '#e67e22');
+                } else if (frame < 160) {
+                    drawText('"🎉 حفلة؟ ممتاز... حفلة ليلى هنا!"', W / 2, H - 80, 30, '#27ae60');
+                } else {
+                    if (frame > 190) {
+                        scene = 4;
+                        frame = 0;
+                        // توليد جزيئات الانفجار
+                        for (let i = 0; i < 80; i++) {
+                            particles.push({
+                                x: W / 2,
+                                y: H / 2,
+                                vx: (Math.random() - 0.5) * 15,
+                                vy: (Math.random() - 0.5) * 15,
+                                r: Math.random() * 8 + 4,
+                                color: `hsl(${Math.random() * 360}, 80%, 60%)`,
+                                life: 1,
+                            });
+                        }
+                    }
+                }
+            }
+
+            // ---- المشهد 4: انفجار المكعب ----
+            else if (scene === 4) {
+                ctx.fillStyle = '#1a0a1a';
+                ctx.fillRect(0, 0, W, H);
+
+                // رسم الجزيئات
+                let allDead = true;
+                for (let p of particles) {
+                    if (p.life > 0) {
+                        allDead = false;
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.vy += 0.2;
+                        p.life -= 0.01;
+                        ctx.globalAlpha = p.life;
+                        drawCircle(p.x, p.y, p.r * p.life, p.color);
+                        ctx.globalAlpha = 1;
+                    }
+                }
+
+                if (allDead && frame > 60) {
+                    scene = 5;
+                    frame = 0;
+                    // توليد زينة الحفلة
+                    for (let i = 0; i < 40; i++) {
+                        particles.push({
+                            x: Math.random() * W,
+                            y: Math.random() * H,
+                            vx: (Math.random() - 0.5) * 2,
+                            vy: (Math.random() - 0.5) * 2 - 1,
+                            r: Math.random() * 6 + 3,
+                            color: `hsl(${Math.random() * 360}, 80%, 70%)`,
+                            life: 1,
+                        });
+                    }
+                }
+
+                drawText('💥', W / 2, H / 2, 80, 'white');
+            }
+
+            // ---- المشهد 5: الحفلة ----
+            else if (scene === 5) {
+                // خلفية الحفلة
+                const grad = ctx.createLinearGradient(0, 0, W, H);
+                grad.addColorStop(0, '#1a0a2e');
+                grad.addColorStop(1, '#2d1b3d');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, W, H);
+
+                // طاولة
+                ctx.fillStyle = '#3d2b1f';
+                ctx.fillRect(W / 2 - 150, H / 2 + 40, 300, 20);
+                ctx.fillRect(W / 2 - 120, H / 2 + 20, 240, 20);
+
+                // كعكة
+                ctx.fillStyle = '#f5cba7';
+                ctx.beginPath();
+                ctx.ellipse(W / 2, H / 2 + 10, 60, 30, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#e74c3c';
+                ctx.fillRect(W / 2 - 30, H / 2 - 10, 60, 15);
+                // شموع
+                for (let i = -1; i <= 1; i++) {
+                    ctx.fillStyle = '#f1c40f';
+                    ctx.fillRect(W / 2 + i * 20 - 3, H / 2 - 30, 6, 20);
+                    ctx.fillStyle = '#e67e22';
+                    ctx.beginPath();
+                    ctx.arc(W / 2 + i * 20, H / 2 - 32, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // بالونات
+                for (let i = 0; i < 12; i++) {
+                    ctx.fillStyle = `hsl(${i * 30}, 80%, 70%)`;
+                    ctx.beginPath();
+                    ctx.ellipse(50 + i * 60, 60 + Math.sin(i + frame * 0.02) * 20, 25, 35, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.strokeStyle = '#555';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(50 + i * 60, 95 + Math.sin(i + frame * 0.02) * 20);
+                    ctx.lineTo(50 + i * 60, 140 + Math.sin(i + frame * 0.02) * 20);
+                    ctx.stroke();
+                }
+
+                // الشخصيات في الحفلة
+                drawLight(W / 2 - 200, H / 2 - 60, 0.5);
+                drawMiyamura(W / 2 + 200, H / 2 - 60, 0.5);
+                drawNeymar(W / 2 + 20, H / 2 - 80, 0.5);
+
+                // نصوص الأغنية
+                if (frame < 80) {
+                    drawText('🎵 عيد ميلاد سعيد...', W / 2, 120, 36, '#f1c40f');
+                } else if (frame < 160) {
+                    drawText('🎵 عيد ميلاد سعيد ليلى...', W / 2, 120, 40, '#f1c40f');
+                } else {
+                    drawText('🎉 ليلى... دايماً ابقي مبتسمة! 🌸', W / 2, 120, 38, '#ff6b6b');
+
+                    // ظهور الجملة الأخيرة
+                    if (frame > 200) {
+                        drawText('😉 واشكري صاحب الفكرة', W / 2, H - 60, 28, 'rgba(255,255,255,0.4)');
+                        drawText('⭐ من فارس... لليلى ⭐', W / 2, H - 20, 24, 'rgba(255,255,255,0.2)');
+                    }
+                }
+
+                // جزيئات متحركة
+                for (let p of particles) {
+                    if (p.life > 0) {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.vy += 0.02;
+                        p.life -= 0.002;
+                        drawCircle(p.x, p.y, p.r * p.life, p.color);
+                    }
+                }
+            }
+
+            // ---- نهاية المشهد (إعادة التشغيل التلقائي) ----
+            if (scene === 5 && frame > 360) {
+                // إعادة التشغيل بعد دقيقة
+                // location.reload();
+            }
+
+            frame++;
+            requestAnimationFrame(drawScene);
+        }
+
+        // ================================================================
+        //  6. بدء التشغيل
+        // ================================================================
+        drawScene();
+
+        // صيانة: في حال توقف المشهد بسبب خطأ
+        console.log('🎉 عيد ميلاد سعيد ليلى!');
+        console.log('⭐ من فارس... بكل حب');
     </script>
-
 </body>
 </html>
